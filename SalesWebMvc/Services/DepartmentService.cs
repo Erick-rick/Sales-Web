@@ -7,26 +7,19 @@ using System.Threading.Tasks;
 
 namespace SalesWebMvc.Services
 {
-    public class SellerService
+    public class DepartmentService
     {
         private readonly SalesWebMvcContext _context; //readonly - para previnir que a dependencia não possa ser alterada
-        
-        public SellerService (SalesWebMvcContext context)
+
+        public DepartmentService(SalesWebMvcContext context)
         {
             _context = context;
         }
 
-        public List<Seller> FindAll() //Operação sincrona- a aplicação fica bloqueada até a ação termina
+        public List<Department> FindAll() //Operação sincrona- a aplicação fica bloqueada até a ação termina
         {
-            return _context.Seller.ToList();
+            return _context.Department.OrderBy(x => x.Name).ToList();
 
         }
-
-        public void Insert (Seller obj)
-        {
-            _context.Add(obj);
-            _context.SaveChanges();
-        }
-
     }
 }
